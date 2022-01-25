@@ -70,7 +70,6 @@ def room_data(request):
         room_info.status=True
         room_info.save()
         messages.success(request,"room was alloted successfully")
-        return HttpResponse("wow successfully")
-
+        return HttpResponse("wow succesfully marked")
     return HttpResponse("hello world")
     

@@ -15,14 +15,26 @@
             border: 1px solid black;
             padding:3px;
             margin:4px;
-            /* background-color:greenyellow; */
+            background-color:greenyellow;
             text-align:center
             
         }
+        .small_red{
+            background-color:red;
+            /* border: 2px solid green; */
 
+        }
+        .button_new{
+            background-color:red;
+            border:none;
+            width:100%;
+
+            
+        }
         .button{
-            /* background-color:greenyellow; */
             border: none;
+            background-color:greenyellow;
+
             width:100%;
         }
     </style>
@@ -39,6 +51,18 @@
     <div class="room">
     {% for j in hell %}
 
+           
+            {% if j.status == True %}
+            <div class="small_red">
+                <form action="/roomallo" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name = "rno" value={{ j.room_number }}>
+                    <input type="hidden" name= "person_name" value= {{ name }}>
+                    
+                  <button type="submit" class= "button_new">{{j.room_number}}</button>
+                </form>
+            </div>
+            {%else%}
             <div class="small">
                 <form action="/roomallo" method="post">
                     {% csrf_token %}
@@ -48,7 +72,7 @@
                   <button type="submit" class= "button">{{j.room_number}}</button>
                 </form>
             </div>
-       
+            {% endif %}
 
     {% endfor %}
     </div>
