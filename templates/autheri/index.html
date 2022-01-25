@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>authentication</title>
+</head>
+<body>
+   
+  
+    {% if user.is_authenticated %}
+    <h3>hello {{fname}} </h3>
+    
+    <h4>"you are successfully locked din"</h4>
+    <button type="submit"><a href="/signout-new">signout</a></button>
+    {% else %}
+<h1>choose to login or signup</h1>
+    <button type="submit"><a href="/signup-new">signup</a></button>
+    <button type="submit"><a href="/signin">signin</a></button>
+    {%endif%}
+</body>
+</html>
