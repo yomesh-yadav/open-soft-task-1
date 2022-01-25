@@ -5,15 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>authentication</title>
+    <style>
+        .room{
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            
+        }
+        .small{
+            border: 1px solid black;
+            padding:3px;
+            margin:4px;
+            /* background-color:greenyellow; */
+            text-align:center
+            
+        }
+
+        .button{
+            /* background-color:greenyellow; */
+            border: none;
+            width:100%;
+        }
+    </style>
 </head>
 <body>
    
   
     {% if user.is_authenticated %}
-    <h3>hello {{fname}} </h3>
+    <h3>hello {{name}} </h3>
     
     <h4>"you are successfully locked din"</h4>
     <button type="submit"><a href="/signout-new">signout</a></button>
+
+    <div class="room">
+    {% for j in hell %}
+
+            <div class="small">
+                <form action="/roomallo" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name = "rno" value={{ j.room_number }}>
+                    <input type="hidden" name= "person_name" value= {{ name }}>
+                    
+                  <button type="submit" class= "button">{{j.room_number}}</button>
+                </form>
+            </div>
+       
+
+    {% endfor %}
+    </div>
     {% else %}
 <h1>choose to login or signup</h1>
     <button type="submit"><a href="/signup-new">signup</a></button>

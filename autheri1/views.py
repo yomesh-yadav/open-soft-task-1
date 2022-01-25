@@ -1,27 +1,34 @@
 from contextlib import redirect_stderr, redirect_stdout
 from imaplib import _Authenticator
-from os import name
 from telnetlib import AUTHENTICATION
-from tkinter import Entry
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import person_user
+from .models import room
 
 def home(request):
+    
+
+    # for i in range(50):
+    #     r = room.objects.create(room_number=i)
+    #     r.save()
+    
+    
     return render(request,"autheri/index.html")
 def signup(request):
     if request.method == "POST":
         name = request.POST['name']
         rollnum = request.POST['rollnumber']
+        
         email = request.POST['email']
-        passworry = request.POST['passworry']
+        passw = request.POST['passworry']
 
-        student_details= person_user(name=name,rollnumber=rollnum,email=email,password=passworry)
-        student_details.save()
-
+        myuser=User.objects.create_user( username=rollnum,email=email, password=passw)
+       
+        myuser.first_name=name
+        myuser.save()
         messages.success(request,"accunt successfully created")
         return redirect('/signin')
 
@@ -29,21 +36,22 @@ def signup(request):
     return render(request,"autheri/signup.html")
 def signin(request):
     data={}
+    inte= room.objects.all()
+   
     if request.method=='POST':
-            rollnumber = request.POST['rollnumber']
+            rollnum = request.POST['rollnumber']
             passw=request.POST['passw']
-
-            check = person_user.objects.get(rollnumber=rollnumber)
-            if check==Entry.DoesNotExist:
-                messages.error("user doesnot exists")
-                return render(request,"autheri/signin.html")
-            elif check.password==passw :
-                temp = check.name
-                data={name:temp}
-
-                return render(request,"autheri/index.html",data=data)
+            User=authenticate(username=rollnum, password=passw)
+            print(User.username)
+            if  User is not None:
+                login(request,User)
+                data={'name':User.first_name,
+                'hell':inte,
+                }
+                return render(request,"autheri/index.html",data)
             else:
-                return render(request,"autheri/signin.html")
+                messages.error(request,"bad credentials")
+                return render(request,"autheri/signin.html",data)
     return render(request,"autheri/signin.html")
 
 
@@ -51,4 +59,18 @@ def signout(request):
     logout(request)
     messages.success(request,"loged out successfully")
     return render(request,"autheri/index.html")
+
+def room_data(request):
+    if request.method=="POST":
+        print(request.POST.get('person_name'))
+        name = request.POST['person_name']
+        rnum= request.POST['rno']
+        room_info = room.objects.get(room_number=rnum)
+        room_info.person_name=name
+        room_info.status=True
+        room_info.save()
+        messages.success(request,"room was alloted successfully")
+        return HttpResponse("wow successfully")
+
+    return HttpResponse("hello world")
     
