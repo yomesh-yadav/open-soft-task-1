@@ -4,51 +4,115 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>authentication</title>
-    <style>
-        .room{
-            display: grid;
-            grid-template-columns: auto auto auto auto auto;
-            
-        }
-        .small{
-            border: 1px solid black;
-            padding:3px;
-            margin:4px;
-            background-color:greenyellow;
-            text-align:center
-            
-        }
-        .small_red{
-            background-color:red;
-            /* border: 2px solid green; */
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-        }
-        .button_new{
-            background-color:red;
-            border:none;
-            width:100%;
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-            
-        }
-        .button{
-            border: none;
-            background-color:greenyellow;
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>authentication</title>
+<style>
 
-            width:100%;
-        }
+    .room{
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        
+    }
+    
+    .small{
+        border: 1px solid black;
+        padding:3px;
+        margin:4px;
+        background-color:greenyellow;
+        text-align:center
+        
+    }
+    .small_red{
+        background-color:red;
+        /* border: 2px solid green; */
+        padding:3px;
+        margin:4px;
+        border: 1px solid black;
+        
+    }
+    .button_new{
+        background-color:red;
+        border:none;
+        width:100%;
+        
+        
+    }
+    .button{
+        border: none;
+        background-color:greenyellow;
+        
+        width:100%;
+    }
+    nav{
+        display:flex;
+        background-color:honeydew;
+        height:60px;
+    }
+    .butt{
+        border-radius: 5px;
+        position: relative;
+        top: 5px;
+        margin:4px;
+        margin-bottom:4px;
+        left:700px
+        
+        
+        
+    }
+    h2{
+        margin-left: 40px;
+        position:relative;
+        bottom:4px;
+    }
+    .new_body{
+        display: flex;
+        flex-direction:column;
+        background-image:url(https://images.unsplash.com/photo-1531694402898-042bd3957f41?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80);
+        background-size: 1250px 580px;
+        background-repeat: no-repeat;
+        text-align: center;
+        height:577px;
+        
+    }        
+    .first{
+        margin-top:150px;
+    }
+    .control{
+        width:100px;
+        height:40px;
+        border-radius: 10px;
+        border: 1px solid black;
+    }
+    .heading{
+        font-family: Brush Script MT;
+        
+        font-weight:800;
+    }
     </style>
 </head>
 <body>
-   
-  
-    {% if user.is_authenticated %}
-    <h3>hello {{name}} </h3>
     
-    <h4>"you are successfully locked din"</h4>
-    <button type="submit"><a href="/signout-new">signout</a></button>
+    
+    {% if user.is_authenticated %}
+    <nav>
+        <h2>Hello {{name}} !!!! </h2>
+      
+        
+        
+        <button type="submit" class="butt"><a href="/signout-new">signout</a></button>
+    </nav>
+    <br>
+        <br>
 
     <div class="room">
+        
     {% for j in hell %}
 
            
@@ -59,7 +123,7 @@
                     <input type="hidden" name = "rno" value={{ j.room_number }}>
                     <input type="hidden" name= "person_name" value= {{ name }}>
                     
-                  <button type="submit" class= "button_new">{{j.room_number}}</button>
+                  <button type="submit" class= "button_new">{{j.room_number}} - {{ j.person_name }}</button>
                 </form>
             </div>
             {%else%}
@@ -77,9 +141,23 @@
     {% endfor %}
     </div>
     {% else %}
-<h1>choose to login or signup</h1>
-    <button type="submit"><a href="/signup-new">signup</a></button>
-    <button type="submit"><a href="/signin">signin</a></button>
+    <div class="new_body" >
+      
+        <div class="heading">
+            <h1 >Choose To Login or Signup</h1>
+
+        </div>
+        <div class="first">
+            <button type="submit" class=" control "><a href="/signup-new"  >Signup</a></button>
+           
+          
+            <button type="submit" class="control"><a href="/signin" >Login</a></button>
+        </div>
+           
+        
+    </div>
+    
+    
     {%endif%}
 </body>
 </html>
