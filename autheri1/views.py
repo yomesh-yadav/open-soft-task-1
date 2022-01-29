@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import room
 from django.http import JsonResponse
+from .models import Profile
 def home(request):
     
 
@@ -63,7 +64,6 @@ def signout(request):
 def room_data(request):
     if request.method=="POST":
         print(request.user)
-        uuser = request.user
         inte= room.objects.all()
         print(request.POST.get('person_name'))
         name = request.POST['person_name']
@@ -72,9 +72,14 @@ def room_data(request):
         room_info.person_name=name
         room_info.status=True
         room_info.save()
+        uuser = request.user
+        uuser.profile.is_allocated =True
+        uuser.save()
+        print(uuser.profile.is_allocated)        
         data={
                     'name':uuser.first_name,
                     'hell':inte,
+                    'is_all':uuser.profile.is_allocated,
             }
         messages.success(request,"room was alloted successfully")
         return render(request,"autheri/index.html",data)

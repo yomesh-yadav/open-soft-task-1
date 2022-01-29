@@ -1,163 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<title>authentication</title>
-<style>
-
-    .room{
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>authentication</title>
+    <script>
+function myFunction() {
+        var txt;
+        if (confirm("you are not allowed to book more rooms ")) {
+          txt = "You pressed OK!";
+        } else {
+          txt = "You pressed Cancel!";
+        }
+        document.getElementById("demo").innerHTML = txt;
+      }
+    </script>
+    
+    <style>
+      .room {
         display: grid;
         grid-template-columns: auto auto auto auto auto;
-        
-    }
-    
-    .small{
+      }
+
+      .small {
         border: 1px solid black;
-        padding:3px;
-        margin:4px;
-        background-color:greenyellow;
-        text-align:center
-        
-    }
-    .small_red{
-        background-color:red;
+        padding: 3px;
+        margin: 4px;
+        background-color: greenyellow;
+        text-align: center;
+      }
+      .small_red {
+        background-color: red;
         /* border: 2px solid green; */
-        padding:3px;
-        margin:4px;
+        padding: 3px;
+        margin: 4px;
         border: 1px solid black;
-        
-    }
-    .button_new{
-        background-color:red;
-        border:none;
-        width:100%;
-        
-        
-    }
-    .button{
+      }
+      .button_new {
+        background-color: red;
         border: none;
-        background-color:greenyellow;
-        
-        width:100%;
-    }
-    nav{
-        display:flex;
-        background-color:honeydew;
-        height:60px;
-    }
-    .butt{
+        width: 100%;
+      }
+      .button {
+        border: none;
+        background-color: greenyellow;
+
+        width: 100%;
+      }
+      nav {
+        display: flex;
+        background-color: honeydew;
+        height: 60px;
+      }
+      .butt {
         border-radius: 5px;
         position: relative;
         top: 5px;
-        margin:4px;
-        margin-bottom:4px;
-        left:700px
-        
-        
-        
-    }
-    h2{
+        margin: 4px;
+        margin-bottom: 4px;
+        left: 700px;
+      }
+      h2 {
         margin-left: 40px;
-        position:relative;
-        bottom:4px;
-    }
-    .new_body{
+        position: relative;
+        bottom: 4px;
+      }
+      .new_body {
         display: flex;
-        flex-direction:column;
-        background-image:url(https://images.unsplash.com/photo-1531694402898-042bd3957f41?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80);
+        flex-direction: column;
+        background-image: url(https://images.unsplash.com/photo-1531694402898-042bd3957f41?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80);
         background-size: 1250px 580px;
         background-repeat: no-repeat;
         text-align: center;
-        height:577px;
-        
-    }        
-    .first{
-        margin-top:150px;
-    }
-    .control{
-        width:100px;
-        height:40px;
+        height: 577px;
+      }
+      .first {
+        margin-top: 150px;
+      }
+      .control {
+        width: 100px;
+        height: 40px;
         border-radius: 10px;
         border: 1px solid black;
-    }
-    .heading{
+      }
+      .heading {
         font-family: Brush Script MT;
-        
-        font-weight:800;
-    }
+
+        font-weight: 800;
+      }
     </style>
-</head>
-<body>
-    
-    
+  </head>
+  <body>
     {% if user.is_authenticated %}
     <nav>
-        <h2>Hello {{name}} !!!! </h2>
-      
-        
-        
-        <button type="submit" class="butt"><a href="/signout-new">signout</a></button>
+      <h2>Hello {{name}} !!!!</h2>
+
+      <button type="submit" class="butt">
+        <a href="/signout-new">signout</a>
+      </button>
     </nav>
-    <br>
-        <br>
+    <br />
+    <br />
 
     <div class="room">
-        
-    {% for j in hell %}
+      {% for j in hell %}
+       {% if j.status == True %}
+      <div class="small_red">
+        <form action="/roomallo" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="rno" value={{ j.room_number }} />
+          <input type="hidden" name="person_name" value={{ name }} />
 
+          <button type="submit" class="button_new">
+            {{j.room_number}} - {{ j.person_name }}
+          </button>
+        </form>
+      </div>
+      {%else%} 
+
+      {% if user.profile.is_allocated == False %}
+      <div class="small">
+        <form action="/roomallo" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="rno" value={{ j.room_number }} />
+          <input type="hidden" name="person_name" value={{ name }} />
+
+          <button type="submit" class="button">{{j.room_number}}</button>
+        </form>
+      </div>
+        {%else%} 
+       
+        <div class="small">
            
-            {% if j.status == True %}
-            <div class="small_red">
-                <form action="/roomallo" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name = "rno" value={{ j.room_number }}>
-                    <input type="hidden" name= "person_name" value= {{ name }}>
-                    
-                  <button type="submit" class= "button_new">{{j.room_number}} - {{ j.person_name }}</button>
-                </form>
-            </div>
-            {%else%}
-            <div class="small">
-                <form action="/roomallo" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name = "rno" value={{ j.room_number }}>
-                    <input type="hidden" name= "person_name" value= {{ name }}>
-                    
-                  <button type="submit" class= "button">{{j.room_number}}</button>
-                </form>
-            </div>
-            {% endif %}
-
-    {% endfor %}
+    
+              <button class ="button"onclick="myFunction()">{{j.room_number}}</button>
+            
+          </div>
+        {% endif %}
+        {% endif %}
+      {% endfor %}
     </div>
     {% else %}
-    <div class="new_body" >
-      
-        <div class="heading">
-            <h1 >Choose To Login or Signup</h1>
+    <div class="new_body">
+      <div class="heading">
+        <h1>Choose To Login or Signup</h1>
+      </div>
+      <div class="first">
+        <button type="submit" class="control">
+          <a href="/signup-new">Signup</a>
+        </button>
 
-        </div>
-        <div class="first">
-            <button type="submit" class=" control "><a href="/signup-new"  >Signup</a></button>
-           
-          
-            <button type="submit" class="control"><a href="/signin" >Login</a></button>
-        </div>
-           
-        
+        <button type="submit" class="control">
+          <a href="/signin">Login</a>
+        </button>
+      </div>
     </div>
-    
-    
+
     {%endif%}
-</body>
+  </body>
 </html>
