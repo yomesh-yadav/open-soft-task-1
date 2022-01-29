@@ -9,25 +9,99 @@
         body{
             background-color:honeydew;
         }
+        body {
+	background: url(https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80) no-repeat center center fixed;
+	background-size:cover;
+	font-size: 16px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	margin: 0;
+	color: #666;
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 10vh;
+  background-image: url(https://images.unsplash.com/photo-1487147264018-f937fba0c817?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80);
+  background-size:cover;
+  font-family: sans-serif;
+  font-size:20px;
+  
+  border-radius: 8px;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+  /* height: 310px; */
+  margin: 6rem auto 8.1rem auto;
+  width: 310px;
+  
+}
+.main_content{
+  font-family: Brush Script MT ;
+  color : black;
+  font-size: 10px;;
+  font-weight:bold;
+  letter-spacing: 4px;
+  padding-bottom: 23px;
+  padding-top: 13px;
+  text-align: center;
+
+}
+.content{
+  padding:5px;
+  border-radius: 4px;
+  border: 1px solid black;
+  width: 60%;
+  
+}
+.content-button{
+  width: 60%;
+  background-color: antiquewhite;
+  border: 1px solid black;
+  border-radius: 4px;
+
+
+}
+.content2{
+    width: 60%;
+    padding:5px;
+  background-color: antiquewhite;
+  border: 1px solid black;
+  border-radius: 4px;
+}
     </style>
 </head>
 <body>
-    <h1>signup for your account</h1>
-    <form action="/signup-new" method="post">
-        {% csrf_token %}
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name">
-        <br>
-        <label for="rollnumber">Rollnumber</label>
-        <input type="text" name="rollnumber" id="rollnumber">
-        <br>
-        <label for="email">email</label>
-        <input type="email" name="email" id="email">
-        <br>
-        <label for="passworry">password</label>
-        <input type="password" name="passworry" id="passworry">
-        <br>
-        <button type="submit" >submit</button>
-    </form>
+    
+    <div class ="main">
+        <div class ="main_content">
+            <h1>Signup for your account</h1>
+         
+          
+           <form action="/signup-new" method="post">
+            {% csrf_token %}
+            <label for="name">Name</label>
+            <br>
+            <input type="text" name="name" id="name" class="content">
+            <br>
+            <label for="rollnumber">Rollnumber</label>
+            <br>
+            <input type="text" name="rollnumber" id="rollnumber" class="content">
+            <br>
+            <label for="email">Email</label>
+            <br>
+            <input type="email" name="email" id="email" class="content">
+            <br>
+            <label for="passworry">Password</label>
+            <br>
+            <input type="password" name="passworry" id="passworry" class="content">
+            <br>
+            <hr>
+            <button type="submit" class="content2">Submit</button>
+        </form>
+      <br/>
+      </div>
+                
+                
 </body>
 </html>
