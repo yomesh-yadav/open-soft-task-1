@@ -43,7 +43,7 @@ def signin(request):
             rollnum = request.POST['rollnumber']
             passw=request.POST['passw']
             User=authenticate(username=rollnum, password=passw)
-            print(User.username)
+            # print(User.username)
             if  User is not None:
                 login(request,User)
                 data={'name':User.first_name,
