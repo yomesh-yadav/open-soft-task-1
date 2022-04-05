@@ -1,10 +1,12 @@
-PROBLEM STATEMENT : ROOM ALLOCATION
+#**PROBLEM STATEMENT** : 
+  ROOM ALLOCATION
 
 Design a room booking system to allocate and view rooms of students in a hall in IIT Kharagpur.
 
-SKILLS: HTML, CSS, JavaScript, ReactJS, SQL, Python, Flask/Django
+#**SKILLS**:
+HTML, CSS, JavaScript, ReactJS, SQL, Python, Flask/Django
 
-INSTRUCTIONS:
+#**INSTRUCTIONS**:
 
 Create a Room booking system using Flask/Django and SQL/MongoDB.
 When we open the web app, the login page should appear(if the user is not already logged in). If he has not yet registered, a button for sign-up should be present to direct him to the signup page.
