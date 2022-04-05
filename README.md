@@ -4,7 +4,7 @@
 ### Design a room booking system to allocate and view rooms of students in a hall in IIT Kharagpur.
 
 # **SKILLS**:
-### HTML, CSS, JavaScript, ReactJS, SQL, Python, Flask/Django
+### HTML, CSS, JavaScript, Python, Flask/Django
 
 # **INSTRUCTIONS**:
 
