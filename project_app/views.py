@@ -10,14 +10,11 @@ from .models import room
 from django.http import JsonResponse
 from .models import Profile
 def home(request):
-    
-
     # for i in range(50):
     #     r = room.objects.create(room_number=i)
     #     r.save()
-    
-    
     return render(request,"autheri/index.html")
+
 def signup(request):
     if request.method == "POST":
         name = request.POST['name']
@@ -33,8 +30,8 @@ def signup(request):
         messages.success(request,"accunt successfully created")
         return redirect('/signin')
 
-
     return render(request,"autheri/signup.html")
+
 def signin(request):
     data={}
     inte= room.objects.all()
@@ -54,7 +51,6 @@ def signin(request):
                 messages.error(request,"bad credentials")
                 return render(request,"autheri/signin.html",data)
     return render(request,"autheri/signin.html")
-
 
 def signout(request):
     logout(request)
@@ -83,5 +79,4 @@ def room_data(request):
             }
         messages.success(request,"room was alloted successfully")
         return render(request,"autheri/index.html",data)
-    return HttpResponse("hello world")
-    
+    return HttpResponse("hello world")  
